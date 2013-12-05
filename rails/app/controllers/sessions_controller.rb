@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   def create
     begin
-      user = User.authenticate params[:username_or_email], params[:password]
+      user = User.authenticate params[:email], params[:password]
       session[:user_id] = user.id
       redirect_to users_path
     rescue Stormpath::Error => error
@@ -16,8 +16,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    @current_user = nil
-    @is_admin = nil
     session[:user_id] = nil
     redirect_to new_session_path
   end
