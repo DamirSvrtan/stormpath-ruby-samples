@@ -2,7 +2,7 @@ StormpathSample::Application.routes.draw do
 
   root to: 'users#index'
 
-  resource :session
+  resource :session, only: [:new, :create, :destroy]
 
   get 'password-reset/:sptoken' => 'password_reset_tokens#edit', as: :password_reset
   put 'password-reset/:sptoken' => 'password_reset_tokens#update', as: :update_password

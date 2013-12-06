@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
 
   def create
     begin
-      user = User.authenticate params[:email], params[:password]
+      binding.pry
+      user = User.authenticate params[:username_or_email], params[:password]
       session[:user_id] = user.id
       redirect_to users_path
     rescue Stormpath::Error => error

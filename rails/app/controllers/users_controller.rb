@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def index
     @delete_enabled = is_admin?
     @users = User.all
+    @application = Stormpath::Rails::Client.root_application
   end
 
   def new
@@ -14,13 +15,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create params[:user]
+    @user = User.create user_params
 
     if @user.save
       flash[:message] = "Your account has been created. Depending on how you've configured your directory, you may need to check your email and verify the account before logging in."
       redirect_to new_session_path
     else
-      binding.pry
       flash[:message] = error_message_for(@user)
       render :new
     end
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def update
     begin
       @user = User.find(params[:id])
-      if @user.update_attributes params[:user]
+      if @user.update_attributes user_params
         flash[:message] = "The account has been updated successfully."
         redirect_to users_path
       else
@@ -46,13 +46,11 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-
     unless @user == current_user
       @user.destroy
     else
       flash[:message] = "You can not delete your own account!"
     end
-
     redirect_to users_path
   end
 
@@ -66,4 +64,10 @@ class UsersController < ApplicationController
 
     redirect_to new_session_path
   end
+
+  private
+
+    def user_params
+      params.require(:user).permit(:username, :given_name, :surname, :email, :css_background, :password)
+    end
 end

@@ -31,14 +31,12 @@ class ApplicationController < ActionController::Base
   end
 
   def require_not_logged_in
-    if logged_in?
-      redirect_to root_path
-    end
+      redirect_to root_path if logged_in?
   end
 
   def require_login
-    unless logged_in?
-      redirect_to new_session_path
-    end
+    redirect_to new_session_path unless logged_in?
   end
+
+
 end
