@@ -17,8 +17,7 @@ class AccountStoreMappingsController < ApplicationController
 
   def destroy
     directory = Stormpath::Rails::Client.client.directories.get params[:href]
-    application = Stormpath::Rails::Client.root_application
-    application.account_store_mappings.each do |account_store_mapping|
+    Stormpath::Rails::Client.root_application.account_store_mappings.each do |account_store_mapping|
        account_store_mapping.delete if account_store_mapping.account_store.href == directory.href
     end
     redirect_to action: :show
