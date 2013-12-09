@@ -30,5 +30,5 @@ class SampleApp < Sinatra::Base
   register Sinatra::SampleApp::Routing::Main
   register Sinatra::SampleApp::Routing::PasswordResetTokens
   register Sinatra::SampleApp::Routing::Session
-
+  register Sinatra::SampleApp::Routing::AccountStoreMappings
 end
