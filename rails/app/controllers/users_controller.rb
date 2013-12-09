@@ -7,7 +7,6 @@ class UsersController < ApplicationController
   def index
     @delete_enabled = is_admin?
     @users = User.all
-    @application = Stormpath::Rails::Client.root_application
   end
 
   def new

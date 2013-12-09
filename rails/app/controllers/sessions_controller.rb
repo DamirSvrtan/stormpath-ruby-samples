@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   def create
     begin
-      binding.pry
+      # binding.pry
       user = User.authenticate params[:username_or_email], params[:password]
       session[:user_id] = user.id
       redirect_to users_path

@@ -1,0 +1,24 @@
+<h1>Account store</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Toggle</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @directories.each do |directory| %>
+    <tr>
+      <td><%= directory.name %></td>
+      <td>
+        <% if @account_stores.include? directory %>
+          <%= link_to "Delete", account_store_mappings_path(href: directory.href), method: :delete %>
+        <% else %>
+          <%= link_to "Add", account_store_mappings_path(href: directory.href), method: :post %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
