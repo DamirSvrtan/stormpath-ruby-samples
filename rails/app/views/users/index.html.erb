@@ -6,7 +6,6 @@
       <th>Email</th>
       <th>Given Name</th>
       <th>Surname</th>
-      <th>Full Name</th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +14,6 @@
       <td><%= user.email %></td>
       <td><%= user.given_name %></td>
       <td><%= user.surname %></td>
-      <td><%= user.full_name %></td>
       <td>
         <%= button_to 'Edit', edit_user_path(user), :class => 'btn', :method => :get %>
       </td>
