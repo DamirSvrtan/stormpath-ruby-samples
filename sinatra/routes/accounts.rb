@@ -36,6 +36,7 @@ module Sinatra
             account.given_name = params[:given_name]
             account.surname = params[:surname]
             account.email = params[:email]
+            account.custom_data.put(:favorite_color, params[:custom_data][:favorite_color])
             account.save
 
             flash[:notice] = 'Account edited successfully.'
