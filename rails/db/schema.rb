@@ -9,17 +9,17 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130501190622) do
+ActiveRecord::Schema.define(version: 20130501190622) do
 
-  create_table "users", :force => true do |t|
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+  create_table "users", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "stormpath_url"
     t.string   "css_background"
   end
 
-  add_index "users", ["stormpath_url"], :name => "index_users_on_stormpath_url"
+  add_index "users", ["stormpath_url"], name: "index_users_on_stormpath_url"
 
 end
