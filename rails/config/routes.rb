@@ -13,6 +13,7 @@ StormpathSample::Application.routes.draw do
     get 'verify', on: :collection
   end
 
+  resource :account_store, only: [:create]
   resource :account_store_mappings
 
 end

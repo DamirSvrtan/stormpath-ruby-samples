@@ -3,7 +3,7 @@ require 'pry-debugger'
 
 class ApplicationController < ActionController::Base
 
-  ADMIN_GROUP_NAME = "foo"
+  ADMIN_GROUP_NAME = "SampleApplication Directory"
 
   protect_from_forgery
 

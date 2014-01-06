@@ -18,7 +18,7 @@
         <%= button_to 'Edit', edit_user_path(user), :class => 'btn', :method => :get %>
       </td>
       <td>
-        <%= button_to 'Remove', user, :confirm => 'Are you sure?', :method => :delete, :class => 'btn', :disabled => !!!@delete_enabled %>
+        <%= button_to 'Remove', user, :confirm => 'Are you sure?', :method => :delete, :class => 'btn', disabled: !is_admin? %>
       </td>
     </tr>
   <% end %>

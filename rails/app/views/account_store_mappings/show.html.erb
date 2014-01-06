@@ -22,3 +22,16 @@
   <% end %>
   </tbody>
 </table>
+<h4> Create new directory </h4>
+<%= form_tag(:account_store) do %>
+  <%= text_field_tag :directory %>
+  <%= hidden_field_tag :account_store_type, :directory %>
+  <br/>
+  <%= submit_tag "Create Directory" %>
+<% end %>
+<h4> Create new group </h4>
+<%= form_tag do %>
+  <%= text_field_tag "Group" %>
+  <br/>
+  <%= submit_tag "Create Group" %>
+<% end %>
