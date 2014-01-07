@@ -4,7 +4,6 @@ class AccountStoreMappingsController < ApplicationController
   
   def show
     @directories = Stormpath::Rails::Client.client.directories
-    @groups = Stormpath::Rails::Client.client.groups
     @account_stores = Stormpath::Rails::Client.root_application.account_store_mappings.map(&:account_store)
   end
 
