@@ -28,6 +28,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @user_groups = @user.stormpath_account.groups
   end
 
   def update

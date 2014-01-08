@@ -1,5 +1,6 @@
 <h1>Edit Account</h1>
 
+<h4> User Info </h4>
 <%= form_for @user, :html => { :class => "form-horizontal" } do |f| %>
   <div class="control-group">
     <%= label_tag :given_name, nil, class: 'control-label' %>
@@ -37,3 +38,19 @@
     </div>
   </div>
 <% end %>
+
+<h4>User belongs to <%= pluralize(@user_groups.count, 'group') %></h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Group Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @user_groups.each do |user_group| %>
+    <tr>
+      <td><%= user_group.name %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
