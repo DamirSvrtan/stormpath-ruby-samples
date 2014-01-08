@@ -11,6 +11,7 @@ StormpathSample::Application.routes.draw do
 
   resources :users do
     get 'verify', on: :collection
+    resource :group_memberships
   end
 
   resource :directories

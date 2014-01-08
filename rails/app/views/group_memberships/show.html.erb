@@ -1,0 +1,18 @@
+<h1><%= "#{@user.username}" %></h1>
+
+<h4> Users Groups </h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Group Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @application_groups.each do |application_group| %>
+    <tr>
+      <td><%= application_group.name %></td>
+      <td><%= add_or_remove_group?(@users_groups, application_group) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

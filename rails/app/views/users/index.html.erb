@@ -20,6 +20,9 @@
       <td>
         <%= button_to 'Remove', user, :confirm => 'Are you sure?', :method => :delete, :class => 'btn', disabled: !is_admin? %>
       </td>
+      <td>
+        <%= button_to 'Manage Group Memberships', user_group_memberships_path(user.id),  :method => :get, :class => 'btn' %>
+      </td> 
     </tr>
   <% end %>
   </tbody>
