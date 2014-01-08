@@ -1,5 +1,21 @@
 <h1>Account store</h1>
 
+<h4> My Account Store Mappings </h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @account_stores.each do |account_store| %>
+    <tr>
+      <td><%= link_to account_store.name, directories_path(href: account_store.href) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<h4> Manage Account Store Mapping</h4>
 <table class="table">
   <thead>
     <tr>
