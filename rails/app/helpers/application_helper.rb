@@ -16,13 +16,4 @@ module ApplicationHelper
     account_store.class == Stormpath::Resource::Directory ? "Directory" : "Group"
   end
 
-
-  def add_or_remove_group?(users_groups, group)
-    if users_groups.include? group
-      "REMOVE"
-    else
-      "ADD"
-    end
-  end
-  
 end

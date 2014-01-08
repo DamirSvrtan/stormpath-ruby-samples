@@ -11,7 +11,13 @@
   <% @application_groups.each do |application_group| %>
     <tr>
       <td><%= application_group.name %></td>
-      <td><%= add_or_remove_group?(@users_groups, application_group) %></td>
+      <td>
+        <% if @users_groups.include? application_group %>
+          <%= link_to "Remove", user_group_memberships_path(@user.id, group_href: application_group.href), method: :delete %>
+        <% else %>
+          <%= link_to "Add", user_group_memberships_path(@user.id, group_href: application_group.href), method: :post %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
   </tbody>
