@@ -5,12 +5,14 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Account Store Type</th>
     </tr>
   </thead>
   <tbody>
   <% @account_stores.each do |account_store| %>
     <tr>
-      <td><%= link_to account_store.name, directories_path(href: account_store.href) %></td>
+      <td><%= link_to_account_store(account_store) %></td>
+      <td><%= account_store_type(account_store) %></td>
     </tr>
   <% end %>
   </tbody>
