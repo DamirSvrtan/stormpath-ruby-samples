@@ -18,7 +18,7 @@ class GroupMembershipsController < ApplicationController
     group = Stormpath::Rails::Client.root_application.groups.get params[:group_href]
     account = @user.stormpath_account
     account.group_memberships.each do |group_membership|
-      group_membership.delete if group_membership.account.href == account.href && group_membership.group.href == group.href
+      group_membership.delete if group_membership.group.href == group.href
     end
     redirect_to action: :show
   end
