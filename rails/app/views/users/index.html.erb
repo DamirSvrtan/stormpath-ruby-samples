@@ -18,7 +18,7 @@
         <%= button_to 'Edit', edit_user_path(user), :class => 'btn', :method => :get %>
       </td>
       <td>
-        <%= button_to 'Remove', user, :confirm => 'Are you sure?', :method => :delete, :class => 'btn', disabled: !is_admin? %>
+        <%= button_to 'Remove', user, data: {confirm: 'Are you sure?'}, :method => :delete, :class => 'btn', disabled: !is_admin? %>
       </td>
       <td>
         <%= button_to 'Manage Group Memberships', user_group_memberships_path(user.id),  :method => :get, :class => 'btn' %>

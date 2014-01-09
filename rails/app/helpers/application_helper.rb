@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   def brand_header_title
-    Stormpath::Rails::Client.root_application.name
+    Stormpath::Rails::Client.application.name
   end
 
   def link_to_account_store(account_store)
