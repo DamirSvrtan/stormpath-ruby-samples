@@ -3,14 +3,20 @@ require 'pry-debugger'
 
 class ApplicationController < ActionController::Base
 
-  ADMIN_GROUP_NAME = "SampleApplication Directory"
+  ADMIN_GROUP_NAME = "Admins"
 
   protect_from_forgery
 
-  helper_method :logged_in?, :current_user, :is_admin?
+  helper_method :logged_in?, :current_user, :is_admin?, :not_admin?
+
+  def redirect_unless_admin
+    redirect_to root_path unless is_admin?
+  end
 
   def current_user
-    @current_user ||= User.where(id: session[:user_id]).first
+    if session[:user_id]
+      @current_user ||= User.where(id: session[:user_id]).first
+    end
   end
 
   def error_message_for resource
@@ -18,12 +24,13 @@ class ApplicationController < ActionController::Base
   end
 
   def is_admin?
-    if session[:user_id] and not @is_admin
-      account = Stormpath::Rails::Client.find_account current_user.stormpath_url
-      @is_admin = account.groups.any? do |group|
-        group.name == ADMIN_GROUP_NAME
-      end
+    if current_user
+      @is_admin =  current_user.stormpath_account.groups.map(&:name).include? ADMIN_GROUP_NAME
     end
+  end
+
+  def not_admin?
+    !is_admin?
   end
 
   def logged_in?

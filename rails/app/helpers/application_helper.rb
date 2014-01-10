@@ -16,4 +16,14 @@ module ApplicationHelper
     account_store.class == Stormpath::Resource::Directory ? "Directory" : "Group"
   end
 
+
+  def can_delete_others?
+    if current_user
+      current_user.stormpath_account.groups.any? do |group|
+        group.custom_data.get("delete_others") == "true"
+      end
+    end
+  end
+
+
 end

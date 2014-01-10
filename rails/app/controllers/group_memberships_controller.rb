@@ -1,5 +1,7 @@
 class GroupMembershipsController < ApplicationController
 
+  before_action :redirect_unless_admin
+
   before_action { @user = User.find(params[:user_id]) }
 
   def show

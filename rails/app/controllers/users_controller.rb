@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   skip_before_filter :require_login, only: [:new, :create, :verify]
 
   def index
-    @delete_enabled = is_admin?
     @users = User.all
   end
 

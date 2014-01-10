@@ -14,6 +14,7 @@ StormpathSample::Application.routes.draw do
     resource :group_memberships
   end
 
+  get '/admin' => "admin#index"
   resource :directories
   resource :groups
   resource :account_store, only: [:create]

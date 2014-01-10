@@ -1,7 +1,7 @@
 class AccountStoreMappingsController < ApplicationController
   
-  before_filter :require_login
-  
+  before_action :redirect_unless_admin
+
   def show
     @directories = Stormpath::Rails::Client.client.directories
     @account_stores = Stormpath::Rails::Client.application.account_store_mappings.map(&:account_store)
