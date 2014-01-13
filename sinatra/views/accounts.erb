@@ -19,7 +19,7 @@
         <form action="<%= account[:delete_route] %>" method='POST'
           onsubmit="javascript:return confirm('Are you sure you want to delete this account?');">
           <input type="hidden" name="_method" value="DELETE">
-          <input class="btn" <%= "disabled" unless account[:deletable] %> type="submit" value="Delete">
+          <input class="btn" <%= "disabled" unless can_delete_others %> type="submit" value="Delete">
         </form>
       </td>
       <td>
