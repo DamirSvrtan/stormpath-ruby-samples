@@ -8,7 +8,7 @@
     <div class="navbar">
       <div class="navbar-inner">
         <a class="brand" href="/"><%= settings.application.name %></a>
-        <a class="brand" href="/account_store_mappings">Account Store Mappings</a>
+        <a class="brand" href="/account_store_mappings">Account Stores</a>
         <% if is_authenticated? %>
           <form method="post" action="/session">
             <input class="btn logout" type="submit" value="log out | <%= session[:display_name] %>">

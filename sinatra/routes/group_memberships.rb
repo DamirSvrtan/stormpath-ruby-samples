@@ -4,28 +4,39 @@ module Sinatra
       module GroupMemberships
         
         def self.registered(app)
-        #   app.get '/account_store_mappings' do
-        #     require_logged_in
-        #     account_stores = settings.application.account_store_mappings.map(&:account_store)
-        #     directories = settings.client.directories
-        #     render_view :account_store_mappings, { account_stores: account_stores, directories: directories}
-        #   end
 
-        #   app.post '/account_store_mappings' do
-        #     require_logged_in
-        #     directory = settings.client.directories.get CGI.unescape(params[:href])
-        #     settings.client.account_store_mappings.create(application: settings.application, account_store: directory)
-        #     redirect to ("/account_store_mappings")
-        #   end
+          app.get '/accounts/:account_url/group_memberships' do
+            require_logged_in
 
-        #   app.delete'/account_store_mappings' do
-        #     require_logged_in
-        #     directory = settings.client.directories.get CGI.unescape(params[:href])
-        #     settings.application.account_store_mappings.each do |account_store_mapping|
-        #        account_store_mapping.delete if account_store_mapping.account_store.href == directory.href
-        #     end
-        #     redirect to ("/account_store_mappings")
-        #   end
+            account = settings.client.accounts.get CGI.unescape(params[:account_url])
+            account_groups = account.groups
+            application_groups = settings.application.groups
+            render_view :group_memberships, { account_groups: account_groups, application_groups: application_groups, account: account}
+          end
+
+          app.post '/accounts/:account_url/group_memberships/:group_url' do
+            require_logged_in
+            
+            group = settings.application.groups.get CGI.unescape(params[:group_url])
+            account = settings.client.accounts.get CGI.unescape(params[:account_url])
+
+            settings.client.group_memberships.create group: group, account: account
+
+            redirect to ("/accounts/#{CGI.escape(params[:account_url])}/group_memberships")
+          end
+
+          app.delete '/accounts/:account_url/group_memberships/:group_url' do
+            require_logged_in
+            
+            group = settings.application.groups.get CGI.unescape(params[:group_url])
+            account = settings.client.accounts.get CGI.unescape(params[:account_url])
+
+            account.group_memberships.each do |group_membership|
+              group_membership.delete if group_membership.group.href == group.href
+            end
+
+            redirect to ("/accounts/#{CGI.escape(params[:account_url])}/group_memberships")
+          end
 
         # 
         end

@@ -31,4 +31,5 @@ class SampleApp < Sinatra::Base
   register Sinatra::SampleApp::Routing::PasswordResetTokens
   register Sinatra::SampleApp::Routing::Session
   register Sinatra::SampleApp::Routing::AccountStoreMappings
+  register Sinatra::SampleApp::Routing::GroupMemberships
 end

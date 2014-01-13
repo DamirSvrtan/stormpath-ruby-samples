@@ -14,6 +14,7 @@ module Sinatra
                 :email => account.email,
                 :edit_route => "/accounts/#{CGI.escape(account.href)}/edit",
                 :delete_route => "/accounts/#{CGI.escape(account.href)}",
+                :manage_group_memberships => "/accounts/#{CGI.escape(account.href)}/group_memberships",
                 :deletable => is_admin?
               }
             end

@@ -22,6 +22,9 @@
           <input class="btn" <%= "disabled" unless account[:deletable] %> type="submit" value="Delete">
         </form>
       </td>
+      <td>
+        <a class="btn" href="<%= account[:manage_group_memberships] %>">Manage Group Memberships</a>
+      </td>
     </tr>
   <% end %>
   </tbody>
