@@ -17,7 +17,7 @@ class GroupMembershipsController < ApplicationController
   end
 
   def destroy
-    group = Stormpath::Rails::Client.pplication.groups.get params[:group_href]
+    group = Stormpath::Rails::Client.application.groups.get params[:group_href]
     account = @user.stormpath_account
     account.group_memberships.each do |group_membership|
       group_membership.delete if group_membership.group.href == group.href
