@@ -3,28 +3,44 @@ module Sinatra
     module Routing
       module Groups
         def self.registered(app)
-          # app.get '/account_store_mappings' do
-          #   require_logged_in
-          #   account_stores = settings.application.account_store_mappings.map(&:account_store)
-          #   directories = settings.client.directories
-          #   render_view :account_store_mappings, { account_stores: account_stores, directories: directories}
-          # end
 
-          # app.post '/account_store_mappings' do
-          #   require_logged_in
-          #   directory = settings.client.directories.get CGI.unescape(params[:href])
-          #   settings.client.account_store_mappings.create(application: settings.application, account_store: directory)
-          #   redirect to ("/account_store_mappings")
-          # end
+          app.get '/directories/:directory_url/groups/:group_url' do
+            require_logged_in
 
-          # app.delete'/account_store_mappings' do
-          #   require_logged_in
-          #   directory = settings.client.directories.get CGI.unescape(params[:href])
-          #   settings.application.account_store_mappings.each do |account_store_mapping|
-          #      account_store_mapping.delete if account_store_mapping.account_store.href == directory.href
-          #   end
-          #   redirect to ("/account_store_mappings")
-          # end
+            directory = settings.client.directories.get CGI.unescape(params[:directory_url])
+
+            group = directory.groups.get CGI.unescape(params[:group_url])
+
+            group_accounts = group.accounts
+
+            group_custom_data = group.custom_data
+
+            render_view :group, { group: group, directory: directory, group_accounts: group_accounts, group_custom_data: group_custom_data }
+          end
+
+          app.post '/directories/:directory_url/groups' do
+            require_logged_in
+
+            directory = settings.client.directories.get CGI.unescape(params[:directory_url])
+
+            directory.groups.create name: params[:group_name]
+
+            redirect to ("/directories/#{CGI.escape(directory.href)}")
+          end
+
+          app.put '/directories/:directory_url/groups/:group_url' do
+            require_logged_in
+
+            directory = settings.client.directories.get CGI.unescape(params[:directory_url])
+
+            group = directory.groups.get CGI.unescape(params[:group_url])
+
+            group.custom_data.put("view_classified_info", params[:view_classified_info])
+            group.custom_data.put("delete_others", params[:delete_others])
+            group.custom_data.save
+
+            redirect to ("/directories/#{CGI.escape(directory.href)}/groups/#{CGI.escape(params[:group_url])}")
+          end
 
         end
       end

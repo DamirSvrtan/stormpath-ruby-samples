@@ -32,4 +32,6 @@ class SampleApp < Sinatra::Base
   register Sinatra::SampleApp::Routing::Session
   register Sinatra::SampleApp::Routing::AccountStoreMappings
   register Sinatra::SampleApp::Routing::GroupMemberships
+  register Sinatra::SampleApp::Routing::Directories
+  register Sinatra::SampleApp::Routing::Groups
 end

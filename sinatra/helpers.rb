@@ -45,6 +45,22 @@ module Sinatra
         @is_admin
       end
 
+      def href_for_account_store(account_store)
+        if account_store.class == Stormpath::Resource::Directory
+          "/directories/#{CGI.escape(account_store.href)}"
+        else
+          "/directories/#{CGI.escape(account_store.directory.href)}/groups/#{CGI.escape(account_store.href)}"
+        end
+      end
+
+      def account_store_type(account_store)
+        if account_store.class == Stormpath::Resource::Directory
+          "Directory"
+        else
+          "Group"
+        end
+      end
+
     end
   end
 end

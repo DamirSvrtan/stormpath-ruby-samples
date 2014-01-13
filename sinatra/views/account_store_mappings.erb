@@ -1,5 +1,23 @@
 <h1>Account List</h1>
 
+<h4> My Account Store Mappings </h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Account Store Type</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% account_stores.each do |account_store| %>
+    <tr>
+      <td><a href="<%= href_for_account_store(account_store) %>"><%= account_store.name %></a></td>
+      <td><%= account_store_type(account_store) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
 <table class="table">
   <thead>
     <tr>
