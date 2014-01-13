@@ -13,9 +13,6 @@
         <% if logged_in? %>
           <%= link_to "Account Stores", account_store_mappings_path, class: :brand %>
           <%= link_to "Log out | #{current_user.username}", session_path, method: :delete, class: "btn logout" %>
-          <% if is_admin? %>
-            <%= link_to "Admin Console", admin_path, class: :brand %>
-          <% end %>
         <% end %>
       </div>
     </div>
